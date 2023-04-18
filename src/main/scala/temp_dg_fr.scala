@@ -1,23 +1,27 @@
 import org.apache.spark.sql.SparkSession
 
+import scala.io.StdIn
+
+
 object temp_dg_fr {
   def main(args:Array[String]) :Unit = {
-    val spark= SparkSession.builder
+    val spark= SparkSession.builder()
       .appName("TempConverter")
+      .master("local[*]")
       .getOrCreate()
 
-    //take input from user
-    print("Enter the temperature in degree celcius :")
-    val temp_celcius = scala.io.StdIn.readInt()
+    // Read the temperature in degrees Celsius from the user
+    print("Enter the temperature in degrees Celsius: ")
+    var inputnum = StdIn.readInt()
 
-    //convert it into dataframe and apply changes to convert it to farhentite
+    var celcius = inputnum.toDouble
 
-    val temp_Df = seq(temp_celcius).toDF("celcius")
+    var farhenite = (celcius *9 /5 + 32)
 
-    val output = temp_Df.withColumn("farhenite",col("celcius")*9/5+32)
+    println(farhenite)
+    spark.stop()
 
-    //Display the converted temperature
-    output.show()
+
 
 
 

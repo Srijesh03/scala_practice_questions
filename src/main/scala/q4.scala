@@ -17,7 +17,7 @@ object q4 extends App {
   if (num >= 100 && num <= 1000) {
     println("Number is in range")
   } else {
-    println("number is out of range")
+    println("number is not in range ")
   }
 
   //check for even or odd
